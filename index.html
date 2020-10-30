@@ -1,0 +1,62 @@
+<html>
+
+<body style="background-color:yellowgreen;">
+ <marquee direction = "right" scrollmount = "100"><h1><b><u>Fill out the form below.</u></b></h1> <img src = "calorie.jpg"  width = 400 height = 250></marquee>
+<label style="cursor: pointer; border: 5px solid aliceblue;">Female:
+  <input id="female" type="radio" name="gender" onchange="calsPerDay()">
+</label>
+<label style="cursor: pointer; border: 5px solid aliceblue;">Male:
+  <input id="male" type="radio" name="gender" onchange="calsPerDay()" checked>
+</label>
+<label style="cursor: pointer; border: 5px solid aliceblue;">Age:
+  <input id="age" type="number" oninput="calsPerDay()" value="50">
+  years
+</label>
+<label style="cursor: pointer; border: 5px solid aliceblue;">Height:
+  <input id="height" type="number" oninput="calsPerDay()" value="70">
+  in inches (12 inches=1 foot)
+</label>
+<label style="cursor: pointer; border: 5px solid aliceblue;">Weight:
+  <input id="weight" type="number" oninput="calsPerDay()" value="225">
+  in pounds
+</label>
+<label style="cursor: pointer; border: 5px solid aliceblue;">
+  Base metabolic rate: <span id="totalCals"></span> kcal per day
+</label>
+<style>
+label {
+    display: block;
+    box-shadow: 0.1em 0.1em 0.2em #888;
+    margin: 1em;
+    border-radius: 1ex;
+    padding: 1ex 1em;
+  }
+  input[type=number] {
+    text-align: right;
+    border: none;
+  }
+  input {
+    float: right;
+  }
+  span {
+    font-weight: bold;
+  }
+</style>
+<script>
+function calsPerDay() {
+    function find(id) { return document.getElementById(id) }
+  
+    var age = find("age").value
+    var height = find("height").value * 2.54
+    var weight = find("weight").value / 2.2
+    var result = 0
+    if (find("male").checked) 
+      result = 66.47 + (13.75 * weight) + (5.0 * height - (6.75 * age))
+    else if (find("female").checked)
+      result = 665.09 + (9.56 * weight) + (1.84 * height - (4.67 * age))
+    find("totalCals").innerHTML = Math.round( result )
+  }
+  calsPerDay()
+</script>
+</body> 
+</html>
